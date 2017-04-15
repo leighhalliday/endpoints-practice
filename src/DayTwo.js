@@ -5,7 +5,7 @@ export default class DayTwo extends React.Component {
     super();
 
     this.state = {
-      beer: null
+      user: null
     };
   }
 
@@ -20,32 +20,34 @@ export default class DayTwo extends React.Component {
         <p>
           <strong>Your task:</strong>
           Fetch the data located at this endpoint:
-          http://api.react.beer/v2/beer/HMJR8Y
+          https://api.github.com/users/marianserna
           <br/>
-          You can put the fetch statement inside of the componentWillMount func
-          which is already created. For this exercise, all you need to do is set the beer
-          in the state. If done correctly the beer will renderered by this component.
+          Load the data and place all of the GitHub user data into the state "user" property.
+          Then
           <br/>
         </p>
 
         <h3>Tips</h3>
         <ul>
-          <li>Try first viewing the data that the endpoint responds with in your browser.</li>
-          <li>Get comfortable with the format of the data... know where the "beer" lives inside of the response.</li>
-          <li>Use console.log() as much as possible to see what is happening.</li>
+          <li>Do this in 3 steps. First get the data using fetch and log it to console.</li>
+          <li>Then put the user data into the state and inspect it using react dev tools.</li>
+          <li>Last display the pieces of info requested below in the render function.</li>
         </ul>
       </div>
     );
   }
 
   render() {
-    if (!this.state.beer) {
+    if (!this.state.user) {
       return this.renderInstructions();
     }
 
     return (
       <div>
-        {JSON.stringify(this.state.beer)}
+        <h2>NAME</h2>
+        <img src="http://lorempixel.com/200/200/"/>
+        <p>BIO</p>
+        <a href="#">Visit Page</a>
       </div>
     )
   }

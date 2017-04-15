@@ -5,7 +5,8 @@ export default class DayThree extends React.Component {
     super();
 
     this.state = {
-      beer: null
+      loaded: false,
+      repos: []
     };
   }
 
@@ -16,36 +17,32 @@ export default class DayThree extends React.Component {
   renderInstructions() {
     return (
       <div>
-        <h1>Day 2</h1>
+        <h1>Day 3</h1>
         <p>
           <strong>Your task:</strong>
           Fetch the data located at this endpoint:
-          http://api.react.beer/v2/beer/HMJR8Y
+          https://api.github.com/users/marianserna/repos
           <br/>
-          You can put the fetch statement inside of the componentWillMount func
-          which is already created. For this exercise, all you need to do is set the beer
-          in the state. If done correctly the beer will renderered by this component.
+          This endpoint returns an array of repos. After fetching them, please set the
+          repos in the state and also set the "loaded" property of the state to true.
           <br/>
         </p>
-
-        <h3>Tips</h3>
-        <ul>
-          <li>Try first viewing the data that the endpoint responds with in your browser.</li>
-          <li>Get comfortable with the format of the data... know where the "beer" lives inside of the response.</li>
-          <li>Use console.log() as much as possible to see what is happening.</li>
-        </ul>
       </div>
     );
   }
 
   render() {
-    if (!this.state.beer) {
+    if (!this.state.loaded) {
       return this.renderInstructions();
     }
 
     return (
       <div>
-        {JSON.stringify(this.state.beer)}
+        <h2>Marian's Repos</h2>
+        <ul>
+          <li>In this UL tag you will map the repos found from fetch.</li>
+          <li>Link to the "html_url" of each repo with the text being displayed the "name".</li>
+        </ul>
       </div>
     )
   }
