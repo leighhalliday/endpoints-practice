@@ -10,7 +10,16 @@ export default class DayOne extends React.Component {
   }
 
   componentWillMount() {
-    // fetch data here
+    const url = 'http://api.react.beer/v2/beer/HMJR8Y';
+
+    fetch(url).then((response) => {
+      console.log(response);
+      return response.json();
+    }).then((data) => {
+      this.setState({
+        beer: data.data
+      });
+    });
   }
 
   renderInstructions() {
