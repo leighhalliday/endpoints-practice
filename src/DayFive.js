@@ -5,7 +5,7 @@ export default class DayFive extends React.Component {
     super();
 
     this.state = {
-      beer: null
+      weather: null
     };
   }
 
@@ -16,36 +16,32 @@ export default class DayFive extends React.Component {
   renderInstructions() {
     return (
       <div>
-        <h1>Day 2</h1>
+        <h1>Day 5</h1>
         <p>
           <strong>Your task:</strong>
           Fetch the data located at this endpoint:
-          http://api.react.beer/v2/beer/HMJR8Y
+          https://api.darksky.net/forecast/f0040393476d8e4b6449dc162be2c30a/37.8267,-122.4233
           <br/>
           You can put the fetch statement inside of the componentWillMount func
-          which is already created. For this exercise, all you need to do is set the beer
-          in the state. If done correctly the beer will renderered by this component.
+          which is already created. The last part of the URL is the latitude and longitude for the weather lookup.
           <br/>
+          Get the user's lat/lon using the geolocation API, and once you have that make a request to get the
+          weather data for their location. Show data from the "Current" section of the response that you think is interesting.
+          <br/>
+          For a bonus challenge, try showing the "daily" weather... it contains information for every day for the next week.
         </p>
-
-        <h3>Tips</h3>
-        <ul>
-          <li>Try first viewing the data that the endpoint responds with in your browser.</li>
-          <li>Get comfortable with the format of the data... know where the "beer" lives inside of the response.</li>
-          <li>Use console.log() as much as possible to see what is happening.</li>
-        </ul>
       </div>
     );
   }
 
   render() {
-    if (!this.state.beer) {
+    if (!this.state.weather) {
       return this.renderInstructions();
     }
 
     return (
       <div>
-        {JSON.stringify(this.state.beer)}
+        Weather Info Goes Here
       </div>
     )
   }
