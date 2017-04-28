@@ -10,7 +10,15 @@ export default class DayTwo extends React.Component {
   }
 
   componentWillMount() {
-    // fetch data here
+    const url = 'https://api.github.com/users/marianserna';
+
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((user) => {
+      this.setState({
+        user: user
+      });
+    })
   }
 
   renderInstructions() {
@@ -44,10 +52,10 @@ export default class DayTwo extends React.Component {
 
     return (
       <div>
-        <h2>NAME</h2>
-        <img src="http://lorempixel.com/200/200/"/>
-        <p>BIO</p>
-        <a href="#">Visit Page</a>
+        <h2>{this.state.user.name}</h2>
+        <img src={this.state.user.avatar_url}/>
+        <p>{this.state.user.bio}</p>
+        <a href={this.state.user.html_url}>Visit Page</a>
       </div>
     )
   }

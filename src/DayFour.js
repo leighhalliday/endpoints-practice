@@ -6,8 +6,24 @@ export default class DayFour extends React.Component {
 
     this.state = {
       currency: null,
-      rates: null
+      rates: []
     };
+  }
+
+  submit = (e) => {
+    e.preventDefault();
+
+    const url = `http://api.fixer.io/latest?base=${this.input.value}`;
+
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((rate) => {
+      console.log(rate);
+      this.setState({
+        currency: rate.base,
+        rates: rate.rates,
+      })
+    });
   }
 
   renderInstructions() {
@@ -34,15 +50,41 @@ export default class DayFour extends React.Component {
   }
 
   render() {
-    if (!this.state.rates) {
-      return this.renderInstructions();
-    }
+    // if (!this.state.rates) {
+    //   return this.renderInstructions();
+    // }
+
+    // const requestedValue = document.querySelector('.currency').value;
 
     return (
       <div>
-        <div className="form-container">FORM HERE</div>
-        <div className="results-container">RESULTS HERE</div>
+
+        <div className="form-container">
+          <form onSubmit={(e) => this.submit(e)}>
+            <div className="input-row">
+              <input
+                ref={input => this.input = input}
+                type="text"
+                className="currency"
+              />
+            </div>
+
+            <div className="input-row">
+              <button type='submit'>Rates</button>
+            </div>
+          </form>
+        </div>
+
+        <div className="results-container">
+          <ul>
+            {Object.keys(this.state.rates).map((key) => {
+              return <li key={key}>Currency: {key} - {this.state.rates[key]}</li>;
+            })}
+          </ul>
+        </div>
+
       </div>
+
     )
   }
 }

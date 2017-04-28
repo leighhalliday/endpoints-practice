@@ -11,7 +11,16 @@ export default class DayThree extends React.Component {
   }
 
   componentWillMount() {
-    // fetch data here
+    const url = 'https://api.github.com/users/marianserna/repos';
+
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((repos) => {
+      this.setState({
+        loaded: true,
+        repos: repos
+      });
+    })
   }
 
   renderInstructions() {
@@ -40,8 +49,9 @@ export default class DayThree extends React.Component {
       <div>
         <h2>Marian's Repos</h2>
         <ul>
-          <li>In this UL tag you will map the repos found from fetch.</li>
-          <li>Link to the "html_url" of each repo with the text being displayed the "name".</li>
+          {this.state.repos.map((repo) => {
+            return <li key={repo.id}>{repo.html_url}, name: {repo.name}</li>;
+          })}
         </ul>
       </div>
     )
